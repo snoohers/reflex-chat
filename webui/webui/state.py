@@ -105,9 +105,13 @@ class State(rx.State):
         self.processing = True
         yield
 
+        # Отладочный вывод о модели перед созданием сессии
+        print(f"Using OpenAI API Model: {os.getenv('OPENAI_MODEL', 'gpt-3.5-turbo')}")
+
+
         # Start a new session to answer the question.
         session = openai.ChatCompletion.create(
-            model=os.getenv("OPENAI_MODEL","gpt-3.5-turbo"),
+            model=os.getenv("OPENAI_MODEL","gpt-4"),
             messages=[
                 { "role": "user", "content": self.question}
             ],
